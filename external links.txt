@@ -1,0 +1,5 @@
+Decision tree model - https://drive.google.com/file/d/1qhmvOVif1Ogxb3bsaYjPGoiZtK4s5TzY/view?usp=sharing
+Light GBM - https://drive.google.com/file/d/1QQV104_wKfqSPC7PbpI-gPB_JVZo46Qs/view?usp=sharing
+Dataset - https://drive.google.com/file/d/1fZ3WHUKAO3mBDg5DpFtD2jOKu6ZlP4w5/view?usp=sharing
+random forest - https://drive.google.com/file/d/1ez_GO8NrvV1jQ3qPVFtTpkWXIlZdbJW2/view?usp=sharing
+scaler - https://drive.google.com/file/d/1Uk_qd5_q9uTiIoIic56xKzKPakd2JmEb/view?usp=sharing

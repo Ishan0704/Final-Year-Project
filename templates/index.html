@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <!-- Dark Mode Toggle Button -->
+    <button id="themeToggle">🌙 Dark Mode</button>
+
+    <div class="container">
+        <h2>Bitcoin Fraud Detection</h2>
+        <form id="predictionForm" method="POST">
+            <label for="address">Enter Bitcoin Address:</label>
+            <input type="text" id="address" name="address" required>
+            <button type="submit">Predict</button>
+        </form>
+        <div id="results"></div>
+    </div>
+
+    <!-- 3D Rotating Cubes -->
+    <div class="cube-container">
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+    </div>
+</body>
+</html>
