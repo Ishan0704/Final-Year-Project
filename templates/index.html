@@ -3,36 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fraud Detection</title>
+    <title>Permanent 3D Cubes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body>
-    <!-- Dark Mode Toggle Button -->
+    <!-- Dark Mode Toggle -->
     <button id="themeToggle">🌙 Dark Mode</button>
 
-    <div class="container">
-        <h2>Bitcoin Fraud Detection</h2>
-        <form id="predictionForm" method="POST">
-            <label for="address">Enter Bitcoin Address:</label>
-            <input type="text" id="address" name="address" required>
-            <button type="submit">Predict</button>
-        </form>
-        <div id="results"></div>
-    </div>
+    <!-- Typing Text Animation -->
+    <div id="typing-text"></div>
 
-    <!-- 3D Rotating Cubes -->
-    <div class="cube-container">
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-    </div>
+    <!-- 3D Cube Container (Always Persistent) -->
+    <div class="cube-container"></div>
 </body>
 </html>

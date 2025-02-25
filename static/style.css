@@ -50,6 +50,7 @@ body.dark-mode {
     pointer-events: none;
     overflow: hidden;
     perspective: 800px;
+    z-index: -1; /* Keeps cubes in background */
 }
 
 /* 3D Cube */
@@ -88,4 +89,30 @@ body.dark-mode {
     0% { transform: rotateX(0deg) rotateY(0deg); }
     50% { transform: rotateX(180deg) rotateY(180deg); }
     100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* Typing Text Animation */
+#typing-text {
+    position: fixed;
+    top: 20%;
+    right: 5%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Courier New", monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid transparent;
+    color: #032943; /* Light Mode (Blue) */
+    
+}
+
+/* Dark Mode Support */
+.dark-mode #typing-text {
+    color: #bfbebd; /* Dark Mode (Orange) */
+}
+
+/* Blinking Cursor */
+@keyframes blinkCursor {
+    50% { border-right: 2px solid currentColor; }
 }

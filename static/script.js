@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const themeToggle = document.getElementById("themeToggle");
     const cubeContainer = document.querySelector(".cube-container");
-    const inputArea = document.querySelector("#predictionForm"); // Ensure it targets the correct input form
+    const typingText = document.getElementById("typing-text");
+    const phrase = "Welcome to CryptGuard";
+    let index = 0;
 
     // Load theme from localStorage
     if (localStorage.getItem("theme") === "dark") {
@@ -22,20 +24,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Function to check if a cube overlaps the input area
-    function isOverlapping(x, y, width, height, element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            x + width > rect.left - 50 && // Added buffer to keep space
-            x < rect.right + 50 &&
-            y + height > rect.top - 50 &&
-            y < rect.bottom + 50
-        );
-    }
-
-    // Function to Create 3D Cubes
+    // Function to Create 3D Cubes (Ensures Cubes Stay on Page)
     function createCubes() {
-        for (let i = 0; i < 15; i++) { // Adjusted number for balance
+        if (document.querySelectorAll(".cube").length > 0) return; // Prevents duplicate cubes
+
+        for (let i = 0; i < 15; i++) {
             let cube = document.createElement("div");
             cube.classList.add("cube");
 
@@ -46,19 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 cube.appendChild(faceDiv);
             });
 
-            let size = 25; // Small cubes
-            let leftPos, topPos;
-            let safeZone = inputArea.getBoundingClientRect();
-
-            let attempts = 0;
-            do {
-                leftPos = Math.random() * (window.innerWidth - size * 2); // Ensure within screen bounds
-                topPos = Math.random() * (window.innerHeight - size * 2);
-                attempts++;
-                if (attempts > 50) break; // Prevent infinite loops
-            } while (isOverlapping(leftPos, topPos, size, size, inputArea));
-
-            let speed = Math.random() * 4 + 3; // Different speeds
+            let size = 25;
+            let leftPos = Math.random() * (window.innerWidth - size * 2);
+            let topPos = Math.random() * (window.innerHeight - size * 2);
+            let speed = Math.random() * 4 + 3;
 
             cube.style.width = `${size}px`;
             cube.style.height = `${size}px`;
@@ -70,5 +54,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    createCubes(); // Generate cubes on page load
+    // Ensure cubes are always there even if page content changes
+    setInterval(() => {
+        createCubes();
+    }, 2000); // Check every 2 seconds if cubes exist
+
+    createCubes(); // Create cubes on page load
+
+    // Typing Effect for "Welcome to CryptGuard"
+    function typeEffect() {
+        if (index < phrase.length) {
+            typingText.textContent += phrase[index];
+            index++;
+            setTimeout(typeEffect, 150); // Adjust speed of typing
+        }
+    }
+
+    typeEffect(); // Start typing effect
 });
