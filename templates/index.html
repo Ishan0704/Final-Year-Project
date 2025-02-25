@@ -17,6 +17,27 @@
     <!-- Typing Text Animation -->
     <div id="typing-text"></div>
 
+    <!-- Prediction Button -->
+    <button id="predictionButton" class="prediction-btn">Get Predictions</button>
+
+    <!-- Prediction Modal -->
+    <div id="predictionModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>  <!-- Close Button -->
+            <h2>Enter Bitcoin Address</h2>
+            <form id="addressForm">
+                <input type="text" id="addressInput" placeholder="Enter address" required />
+                <button type="submit">Predict</button>
+            </form>
+            <div id="predictionResult">
+                <!-- Prediction results will be displayed here -->
+            </div>
+        </div>
+    </div>
+    
+
+
+
     <!-- 3D Cube Container (Always Persistent) -->
     <div class="cube-container"></div>
 </body>
