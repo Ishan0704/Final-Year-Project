@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function createCubes() {
         if (document.querySelectorAll(".cube").length > 0) return;
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 19; i++) {
             let cube = document.createElement("div");
             cube.classList.add("cube");
 

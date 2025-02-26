@@ -1,79 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Permanent 3D Cubes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
     <!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
     <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#working">Working</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-            <li>
-                <button id="themeToggle">🌙 Dark Mode</button>
-            </li>
-        </ul>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#working">Working</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li>
+          <button id="themeToggle">🌙 Dark Mode</button>
+        </li>
+      </ul>
     </nav>
-    
-
-    <!-- Typing Text Animation -->
-    <div id="typing-text"></div>
 
     <section id="about" class="section left">
-        <h2>About Us</h2>
-        <p>Welcome to our website! We are dedicated to providing innovative solutions that make a difference.</p>
-        <p>Our team is committed to pushing the boundaries of technology to create something extraordinary.</p>
-        <p>With expertise in web development, AI, and blockchain, we strive to build cutting-edge applications.</p>
-        <p>We believe in transparency, innovation, and delivering quality solutions to our users.</p>
-        <!-- Prediction Button -->
-        <button id="predictionButton" class="prediction-btn">Get Predictions</button>
+      <div class="typing-container">
+        <div id="typing-text"></div>
+        <i class="fa-solid fa-rocket"></i>
+      </div>
+      <h1 class="section-heading">What is CryptGuard?</h1>
+      <p class="section-text">
+        CryptGuard is an advanced web-based tool designed to detect fraudulent
+        Bitcoin transactions with precision. By simply entering a Bitcoin
+        address, users can receive an instant prediction on whether the
+        transaction is suspicious or legitimate. CryptGuard leverages the power
+        of three robust machine learning models—Decision Tree Classifier, Random
+        Forest Classifier, and LightGBM—to analyze transaction patterns and
+        behaviors. The final verdict is determined through a majority voting
+        mechanism, ensuring reliable and data-driven fraud detection.
+      </p>
+      <p class="section-text">Ready to put CryptGuard to the test?</p>
+      <p class="section-text">
+        Hit 'Check Now' to see our AI in action—uncover fraud in just a few
+        clicks!
+      </p>
+      <!-- Prediction Button -->
+      <button id="predictionButton" class="prediction-btn">Check Now</button>
     </section>
 
     <section id="working" class="section right">
-        <h2>How It Works</h2>
-        <p>Our platform leverages advanced AI models to detect anomalies in transactions.</p>
-        <p>We analyze patterns in financial data to flag potential fraud and ensure security.</p>
-        <p>The system continuously learns from new data, improving accuracy over time.</p>
-        <p>We prioritize user-friendly interfaces, making complex fraud detection simple and accessible.</p>
+      <h1 class="section-heading">What is CryptGuard?</h1>
+      <p class="section-text">
+        CryptGuard is an advanced web-based tool designed to detect fraudulent
+        Bitcoin transactions with precision. By simply entering a Bitcoin
+        address, users can receive an instant prediction on whether the
+        transaction is suspicious or legitimate. CryptGuard leverages the power
+        of three robust machine learning models—Decision Tree Classifier, Random
+        Forest Classifier, and LightGBM—to analyze transaction patterns and
+        behaviors. The final verdict is determined through a majority voting
+        mechanism, ensuring reliable and data-driven fraud detection.
+      </p>
+      <p class="section-text">Ready to put CryptGuard to the test?</p>
+      <p class="section-text">
+        Hit 'Check Now' to see our AI in action—uncover fraud in just a few
+        clicks!
+      </p>
     </section>
 
     <section id="contact" class="section left">
-        <h2>Contact Us</h2>
-        <p>Email: support@ourwebsite.com</p>
-        <p>Phone: +1 (234) 567-890</p>
-        <p>Location: 123 Tech Street, Innovation City</p>
-        <p>Follow us on social media for updates and news.</p>
+      <h1 class="section-heading">What is CryptGuard?</h1>
+      <p class="section-text">
+        CryptGuard is an advanced web-based tool designed to detect fraudulent
+        Bitcoin transactions with precision. By simply entering a Bitcoin
+        address, users can receive an instant prediction on whether the
+        transaction is suspicious or legitimate. CryptGuard leverages the power
+        of three robust machine learning models—Decision Tree Classifier, Random
+        Forest Classifier, and LightGBM—to analyze transaction patterns and
+        behaviors. The final verdict is determined through a majority voting
+        mechanism, ensuring reliable and data-driven fraud detection.
+      </p>
+      <p class="section-text">Ready to put CryptGuard to the test?</p>
+      <p class="section-text">
+        Hit 'Check Now' to see our AI in action—uncover fraud in just a few
+        clicks!
+      </p>
     </section>
-
-    
 
     <!-- Prediction Modal -->
     <div id="predictionModal" class="modal">
-        <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>  <!-- Close Button -->
-            <h2>Enter Bitcoin Address</h2>
-            <form id="addressForm">
-                <input type="text" id="addressInput" placeholder="Enter address" required />
-                <button type="submit">Predict</button>
-            </form>
-            <div id="predictionResult">
-                <!-- Prediction results will be displayed here -->
-            </div>
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <!-- Close Button -->
+        <h2>Enter Bitcoin Address</h2>
+        <form id="addressForm">
+          <input
+            type="text"
+            id="addressInput"
+            placeholder="Enter address"
+            required
+          />
+          <button type="submit">Predict</button>
+        </form>
+        <div id="predictionResult">
+          <!-- Prediction results will be displayed here -->
         </div>
+      </div>
     </div>
-    
-
-
 
     <!-- 3D Cube Container (Always Persistent) -->
     <div class="cube-container"></div>
-</body>
+  </body>
 </html>
