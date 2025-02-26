@@ -12,28 +12,50 @@ document.addEventListener("DOMContentLoaded", function () {
     const addressInput = document.getElementById("addressInput");
     const predictionResult = document.getElementById("predictionResult");
 
-    // Load theme from localStorage
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        themeToggle.textContent = "☀️ Light Mode";
-    }
+    // New modal for detailed transaction info
+    const detailsModal = document.createElement("div");
+    detailsModal.id = "detailsModal";
+    detailsModal.classList.add("modal", "wide-modal"); // Added a class to make it wider
+    detailsModal.innerHTML = `
+        <div class="modal-content">
+            <span id="closeDetailsModal" class="close">&times;</span>
+            <h2>Transaction Details</h2>
+            <div id="detailsContent"></div>
+        </div>
+    `;
+    document.body.appendChild(detailsModal);
 
-    // Toggle Theme Mode
-    themeToggle.addEventListener("click", function () {
-        document.body.classList.toggle("dark-mode");
+    const closeDetailsModal = document.getElementById("closeDetailsModal");
+    const detailsContent = document.getElementById("detailsContent");
 
-        if (document.body.classList.contains("dark-mode")) {
-            localStorage.setItem("theme", "dark");
-            themeToggle.textContent = "☀️ Light Mode";
-        } else {
-            localStorage.setItem("theme", "light");
-            themeToggle.textContent = "🌙 Dark Mode";
+    // CSS to make the second modal wider
+    const style = document.createElement("style");
+    style.innerHTML = `
+        .wide-modal .modal-content {
+            width: 60%; /* Adjust width */
+            max-width: 700px;
         }
-    });
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    `;
+    document.head.appendChild(style);
 
-    // Function to Create 3D Cubes (Ensures Cubes Stay on Page)
+    // Function to Create 3D Cubes
     function createCubes() {
-        if (document.querySelectorAll(".cube").length > 0) return; // Prevents duplicate cubes
+        if (document.querySelectorAll(".cube").length > 0) return;
 
         for (let i = 0; i < 15; i++) {
             let cube = document.createElement("div");
@@ -61,48 +83,44 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Ensure cubes are always there even if page content changes
-    setInterval(() => {
-        createCubes();
-    }, 2000); // Check every 2 seconds if cubes exist
+    setInterval(createCubes, 2000);
+    createCubes();
 
-    createCubes(); // Create cubes on page load
-
-    // Typing Effect for "Welcome to CryptGuard"
     function typeEffect() {
         if (index < phrase.length) {
             typingText.textContent += phrase[index];
             index++;
-            setTimeout(typeEffect, 150); // Adjust speed of typing
+            setTimeout(typeEffect, 150);
         }
     }
 
-    typeEffect(); // Start typing effect
+    typeEffect();
 
-    // Show Modal when button is clicked
     predictionButton.addEventListener("click", function () {
         predictionModal.style.display = "block";
     });
 
-    // Close Modal when the close button is clicked
     closeModal.addEventListener("click", function () {
         predictionModal.style.display = "none";
-        // Clear the modal contents when closed
-        addressInput.value = ''; // Clear input field
-        predictionResult.innerHTML = ''; // Clear result display
+        addressInput.value = '';
+        predictionResult.innerHTML = '';
     });
 
-    // Close Modal when clicked outside of modal content
+    closeDetailsModal.addEventListener("click", function () {
+        detailsModal.style.display = "none";
+    });
+
     window.addEventListener("click", function (event) {
         if (event.target === predictionModal) {
             predictionModal.style.display = "none";
-            // Clear the modal contents when closed
-            addressInput.value = ''; // Clear input field
-            predictionResult.innerHTML = ''; // Clear result display
+            addressInput.value = '';
+            predictionResult.innerHTML = '';
+        }
+        if (event.target === detailsModal) {
+            detailsModal.style.display = "none";
         }
     });
 
-    // Handle form submission for prediction
     addressForm.addEventListener("submit", function (event) {
         event.preventDefault();
         const address = addressInput.value.trim();
@@ -112,40 +130,22 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Send the address to the Flask app for prediction
         fetch("/", {
             method: "POST",
-            body: new URLSearchParams({
-                address: address
-            }),
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
+            body: new URLSearchParams({ address: address }),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Prediction Data:", data); // Log the response to inspect the data structure
+            console.log("Prediction Data:", data);
 
             if (data.error) {
                 predictionResult.innerHTML = `<p style="color: red;">${data.error}</p>`;
             } else {
                 const { predictions, majority_prediction, actual_target } = data;
-                
-                let resultHtml = `<h3>Predictions:</h3>`;
-                resultHtml += `<ul>`;
-                
-                // Ensure predictions is an object and iterate through it
-                if (predictions && typeof predictions === "object") {
-                    for (const model in predictions) {
-                        resultHtml += `<li><strong>${model}:</strong> ${predictions[model]}</li>`;
-                    }
-                } else {
-                    resultHtml += `<li>No predictions found.</li>`;
-                }
 
-                resultHtml += `</ul>`;
-                
-                // Display fraud detection message based on majority_prediction
+                let resultHtml = `<h3>Result:</h3>`;
+
                 if (majority_prediction === 1) {
                     resultHtml += `<p style="color: red;"><strong>Fraudulent Transaction Detected</strong></p>`;
                 } else if (majority_prediction === 0) {
@@ -154,10 +154,29 @@ document.addEventListener("DOMContentLoaded", function () {
                     resultHtml += `<p><strong>Prediction Error: Invalid Majority Prediction</strong></p>`;
                 }
 
-                // Check if actual_target exists, otherwise display 'N/A'
-                resultHtml += `<p><strong>Actual Target:</strong> ${actual_target !== undefined ? actual_target : 'N/A'}</p>`;
-
+                resultHtml += `<button id="viewDetails" class="view-details-btn">View Details</button>`;
                 predictionResult.innerHTML = resultHtml;
+
+                document.getElementById("viewDetails").addEventListener("click", function () {
+                    let detailsHtml = `<h3>Predictions:</h3>`;
+                    
+                    if (predictions && typeof predictions === "object") {
+                        detailsHtml += `<table><tr><th>Model</th><th>Predicted Value</th></tr>`;
+
+                        for (const model in predictions) {
+                            detailsHtml += `<tr><td>${model}</td><td>${predictions[model]}</td></tr>`;
+                        }
+                        
+                        detailsHtml += `</table>`;
+                    } else {
+                        detailsHtml += `<p>No predictions found.</p>`;
+                    }
+                    
+                    detailsHtml += `<p><strong>Actual Target:</strong> ${actual_target !== undefined ? actual_target : 'N/A'}</p>`;
+
+                    detailsContent.innerHTML = detailsHtml;
+                    detailsModal.style.display = "block";
+                });
             }
         })
         .catch(error => {

@@ -103,13 +103,13 @@ body.dark-mode {
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid transparent;
-    color: #032943; /* Light Mode (Blue) */
+    color: #032943; /* Light Mode (Black) */
     
 }
 
 /* Dark Mode Support */
 .dark-mode #typing-text {
-    color: #bfbebd; /* Dark Mode (Orange) */
+    color: #bfbebd; /* Dark Mode (white) */
 }
 
 /* Blinking Cursor */
