@@ -9,6 +9,9 @@ body {
     transition: background 0.3s, color 0.3s;
     scroll-behavior: smooth;
 }
+html {
+    scroll-behavior: smooth;
+}
 
 /* Dark Mode Styles */
 body.dark-mode {
@@ -411,4 +414,84 @@ nav ul li a:hover::after {
 
 .dark-mode .section-heading,.dark-mode .section-text{
     color: #bfbebd; /* Golden yellow for dark mode */
+}
+
+#contact.footer {
+    width: 100% ;
+    display: block;
+    /* background-color: #121212; */
+}
+/* Footer Styling */
+.footer {
+    background: #333; /* Changed to match paragraph color */
+    color: #bfbebd; /* Dark text for contrast */
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Footer container styling */
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer sections */
+.footer-container div {
+    flex: 1;
+    margin: 10px;
+    min-width: 250px;
+}
+
+/* Footer Headings */
+.footer h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #bfbebd /* Darker text for contrast */
+}
+
+/* Footer Text */
+.footer p, 
+.footer li, 
+.footer a {
+    font-size: 1rem;
+    color: #bfbebd; /* Darker text for better visibility */
+    line-height: 1.5;
+}
+
+/* Footer Links */
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin: 5px 0;
+}
+
+.footer-links ul li a {
+    color: #bfbebd; /* Darker link color */
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #f8b400; /* Highlight on hover */
+    transform: scale(1.05);
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid #9d9c9ba8;
+    padding-top: 10px;
+    font-size: 0.9rem;
+    color: #333; /* Darker text */
 }
