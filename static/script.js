@@ -142,15 +142,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     resultHtml += `<p><strong>Prediction Error: Invalid Majority Prediction</strong></p>`;
                 }
+                resultHtml += `
+                <div style="display:flex">
+                    <p>Curious to Unravel the Logic Behind This Prediction?
+                        <a id="viewDetails" style="color:#0077b6;cursor: pointer;padding-left:2%">Click here</a>
+                    </p>
+                </div>
+                `;
 
-                resultHtml += `<button id="viewDetails" class="view-details-btn">View Details</button>`;
                 predictionResult.innerHTML = resultHtml;
 
                 document.getElementById("viewDetails").addEventListener("click", function () {
-                    let detailsHtml = `<h3>Predictions:</h3>`;
+                    let detailsHtml = `<h3>Result of predictions made by the models </h3>`;
                     
                     if (predictions && typeof predictions === "object") {
-                        detailsHtml += `<table><tr><th>Model</th><th>Predicted Value</th></tr>`;
+                        detailsHtml += `<table><tr><th>Models</th><th>Predicted Values</th></tr>`;
 
                         for (const model in predictions) {
                             detailsHtml += `<tr><td>${model}</td><td>${predictions[model]}</td></tr>`;
@@ -163,8 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     detailsHtml += `
                         <div style="display: flex; justify-content: space-between; margin-top: 5%;">
-                            <p style="text-align: left; margin: 0;"><strong>Majority Predictions:</strong> ${majority_prediction !== undefined ? majority_prediction : 'N/A'}</p>
-                            <p style="text-align: right; margin: 0;"><strong>Actual Target:</strong> ${actual_target !== undefined ? actual_target : 'N/A'}</p>
+                            <p style="text-align: left; margin: 0;"><strong>Majority prediction:</strong> ${majority_prediction !== undefined ? majority_prediction : 'N/A'}</p>
+                            <p style="text-align: right; margin: 0;"><strong>Actual value:</strong> ${actual_target !== undefined ? actual_target : 'N/A'}</p>
                         </div>
                         `;
 
