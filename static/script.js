@@ -5,6 +5,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const phrase = "Welcome to CryptGuard";
     let index = 0;
 
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            window.scrollTo({
+                top: targetSection.offsetTop,
+                behavior: "smooth"
+            });
+        });
+    });
+
+
     const predictionButton = document.getElementById("predictionButton");
     const predictionModal = document.getElementById("predictionModal");
     const closeModal = document.getElementById("closeModal");
