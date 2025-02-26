@@ -140,6 +140,26 @@ body.dark-mode {
     border-radius: 10px;
 }
 
+.wide-modal .modal-content {
+    width: 60%; /* Adjust width */
+    max-width: 700px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #f4f4f4;
+}
+
 /* Close Button */
 .close {
     position: absolute;

@@ -28,30 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeDetailsModal = document.getElementById("closeDetailsModal");
     const detailsContent = document.getElementById("detailsContent");
 
-    // CSS to make the second modal wider
-    const style = document.createElement("style");
-    style.innerHTML = `
-        .wide-modal .modal-content {
-            width: 60%; /* Adjust width */
-            max-width: 700px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-    `;
-    document.head.appendChild(style);
 
     // Function to Create 3D Cubes
     function createCubes() {
@@ -85,6 +61,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setInterval(createCubes, 2000);
     createCubes();
+
+    // Toggle Theme Mode
+    themeToggle.addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
+            themeToggle.textContent = "☀️ Light Mode";
+        } else {
+            localStorage.setItem("theme", "light");
+            themeToggle.textContent = "🌙 Dark Mode";
+        }
+    });
 
     function typeEffect() {
         if (index < phrase.length) {
@@ -171,8 +160,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else {
                         detailsHtml += `<p>No predictions found.</p>`;
                     }
-                    
-                    detailsHtml += `<p><strong>Actual Target:</strong> ${actual_target !== undefined ? actual_target : 'N/A'}</p>`;
+
+                    detailsHtml += `
+                        <div style="display: flex; justify-content: space-between; margin-top: 5%;">
+                            <p style="text-align: left; margin: 0;"><strong>Majority Predictions:</strong> ${majority_prediction !== undefined ? majority_prediction : 'N/A'}</p>
+                            <p style="text-align: right; margin: 0;"><strong>Actual Target:</strong> ${actual_target !== undefined ? actual_target : 'N/A'}</p>
+                        </div>
+                        `;
 
                     detailsContent.innerHTML = detailsHtml;
                     detailsModal.style.display = "block";
