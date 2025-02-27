@@ -152,9 +152,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 let resultHtml = `<h3>Result:</h3>`;
 
                 if (majority_prediction === 1) {
-                    resultHtml += `<p style="color: red;"><strong>Fraudulent Transaction Detected</strong></p>`;
+                    resultHtml += `<p style="color: red;"><strong>🚨Suspicious Address Identified!</strong></p>`;
                 } else if (majority_prediction === 0) {
-                    resultHtml += `<p style="color: green;"><strong>Non-Fraudulent Transaction Detected</strong></p>`;
+                    resultHtml += `<p style="color: green;"><strong>🛡️Safe & Legitimate Address Detected</strong></p>`;
                 } else {
                     resultHtml += `<p><strong>Prediction Error: Invalid Majority Prediction</strong></p>`;
                 }
@@ -169,30 +169,40 @@ document.addEventListener("DOMContentLoaded", function () {
                 predictionResult.innerHTML = resultHtml;
 
                 document.getElementById("viewDetails").addEventListener("click", function () {
-                    let detailsHtml = `<h3>Result of predictions made by the models </h3>`;
-                    
+                    let detailsHtml = `<h3>Result of Predictions Made by the Models</h3>`;
+                
+                    // Function to convert 1 and 0 into readable labels
+                    function formatPrediction(value) {
+                        return value === 1 ? "1 🚨Suspicious Address" : "0 🛡️Safe Address";
+                    }
+                
                     if (predictions && typeof predictions === "object") {
                         detailsHtml += `<table><tr><th>Models</th><th>Predicted Values</th></tr>`;
-
+                
                         for (const model in predictions) {
-                            detailsHtml += `<tr><td>${model}</td><td>${predictions[model]}</td></tr>`;
+                            detailsHtml += `<tr><td>${model}</td><td>${formatPrediction(predictions[model])}</td></tr>`;
                         }
-                        
+                
                         detailsHtml += `</table>`;
                     } else {
                         detailsHtml += `<p>No predictions found.</p>`;
                     }
-
+                
                     detailsHtml += `
                         <div style="display: flex; justify-content: space-between; margin-top: 5%;">
-                            <p style="text-align: left; margin: 0;"><strong>Majority prediction:</strong> ${majority_prediction !== undefined ? majority_prediction : 'N/A'}</p>
-                            <p style="text-align: right; margin: 0;"><strong>Actual value:</strong> ${actual_target !== undefined ? actual_target : 'N/A'}</p>
+                            <p style="text-align: left; margin: 0;"><strong>Majority Prediction:</strong> 
+                                ${majority_prediction !== undefined ? formatPrediction(majority_prediction) : 'N/A'}
+                            </p>
+                            <p style="text-align: right; margin: 0;"><strong>Actual Value:</strong> 
+                                ${actual_target !== undefined ? formatPrediction(actual_target) : 'N/A'}
+                            </p>
                         </div>
-                        `;
-
+                    `;
+                
                     detailsContent.innerHTML = detailsHtml;
                     detailsModal.style.display = "block";
                 });
+                
             }
         })
         .catch(error => {

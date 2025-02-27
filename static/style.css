@@ -259,10 +259,13 @@ button[type="submit"] {
     flex-direction: column; /* Ensures content stacks properly */
     justify-content: center; /* Centers content vertically */
     text-align: left; /* Ensures text is aligned to the left */
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
 }
 
-.dark-mode .section{
+.section-div{
+    background-color: #f5f5f5;
+}
+.dark-mode .section-div{
     background-color: #121212;
 }
 
@@ -390,7 +393,7 @@ nav ul li a:hover::after {
 /* Paragraph Text */
 .section-text {
     font-size: 1.2rem; /* Increases readability */
-    line-height: 1.1; /* Adds spacing for clarity */
+    line-height: 1.4; /* Adds spacing for clarity */
     color: #444; /* Slightly darker for better contrast */
     margin-bottom: 2%;
 }
@@ -431,6 +434,9 @@ nav ul li a:hover::after {
     bottom: 0;
     font-family: Arial, sans-serif;
 }
+.dark-mode .footer{
+    background-color: #121212;
+}
 
 /* Footer container styling */
 .footer-container {
@@ -453,7 +459,7 @@ nav ul li a:hover::after {
     margin-bottom: 10px;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #bfbebd /* Darker text for contrast */
+    color: whitesmoke;/* Darker text for contrast */
 }
 
 /* Footer Text */
